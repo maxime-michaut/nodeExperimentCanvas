@@ -4,110 +4,21 @@
 	<meta charset="utf-8"/>
 	<title></title>
 	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> -->
 
 	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous"> -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 	<script type="text/javascript" src="http://localhost:1337/socket.io/socket.io.js"></script>
 	<script type="text/javascript" src="js/client.js"></script>
 	<style>
-		.tuiles{
-			height:80px;
+		#canvas{
+			border:1px solid black;
 		}
 	</style>
 </head>
 <body>
-	<h1>Bienvue</h1>
-	<div class="container">
-
-		<div class="game">
-			<div class="plateau">
-				<div class="row">
-					<div class="tuiles btn btn-default col-md-offset-2 col-md-2">
-					</div>
-					<div class="tuiles btn btn-default col-md-offset-1 col-md-2">
-					</div>
-					<div class="tuiles btn btn-default col-md-offset-1 col-md-2">
-					</div>
-				</div>
-				<div class="row">
-					<div class="tuiles btn btn-default col-md-offset-2 col-md-2">
-					</div>
-					<div class="tuiles btn btn-default col-md-offset-1 col-md-2">
-					</div>
-					<div class="tuiles btn btn-default col-md-offset-1 col-md-2">
-					</div>
-				</div>
-				<div class="row">
-					<div class="tuiles btn btn-default col-md-offset-2 col-md-2">
-					</div>
-					<div class="tuiles btn btn-default col-md-offset-1 col-md-2">
-					</div>
-					<div class="tuiles btn btn-default col-md-offset-1 col-md-2">
-					</div>
-				</div>
-			</div><!--plateau-->
-			<div class="HUD">
-				<div class="row">
-					<div class="btn btn-primary col-md-2">YOU</div>
-					<div class="col-md-1">
-						<span class="score_you">0</span>
-					</div>
-				</div>
-				<div class="row">
-					<div class="btn btn-danger col-md-2">Enemy</div>
-					<div class="col-md-1">
-						<span class="score_enemy">0</span>
-					</div>
-				</div>
-			</div><!--HUD-->
-		</div><!--game-->
-
-		<div class="salon">
-			<div class="row">
-				 <div class="col-md-12">
-				 	<div class="panel panel-info">
-				 		<div class="panel-heading">
-				 			Liste des joueurs
-				 		</div>
-				 		<div class="panel-body">
-				 			<!--Exemple d'un joueur -->
-				 				<div class="col-md-2">
-				 					<span class="Joueurs_pseudo">Thomax</span>
-				 					<a href="">Défier</a>
-				 				</div>
-				 			<!---->
-				 		</div>
-				 	</div>
-				 </div>
-			</div>
-		</div><!--salon-->
-
-		<div class="connection">
-			<div class="row">
-				<div class="col-md-offset-3 col-md-6">
-					<div class="panel panel-primary ">
-						<div class="panel-heading">
-							Connection
-						</div>
-						<div class="panel-body">
-							<form>
-								<div class="form-group">
-									<label for="connection_pseudo">Username</label>
-									<input class="form-control" type="text" name="connection_pseudo" id="connection_pseudo" placeholder="Username"/>
-									<div class="btn btn-primary" id="btn-connect">
-										Connect
-									</div>
-								</div>
-							</form>
-						</div>
-					</div><!--panel-->
-				</div>
-			</div>
-		</div><!--connection-->
-
-
-	</div><!--container-->
+	<canvas id="canvas" height="400" width="400"></canvas>
+	<!-- <script type="text/javascript" src="js/canvas.js"></script> -->
 </body>
 </html>

@@ -21,9 +21,12 @@ var io = require('socket.io').listen(httpServer);
 
 io.sockets.on('connection',function(socket){
 	console.log('new connection'); 
-	socket.on('login',function(user){
-		console.log('on');
-		io.sockets.emit('newuser',{username:username});
+	socket.on('draw',function(params){
+		console.log(params.xa);
+		console.log(params.ya);
+		console.log(params.xb);
+		console.log(params.yb);
+		socket.broadcast.emit('serverDraw',{xa:params.xa, ya:params.ya, xb:params.xb, yb:params.yb});
 	});
 	
 });
