@@ -38,10 +38,10 @@ var channels = [
 		id : 1, name : 'Easy'
 	},
 	{
-		id : 1, name : 'Medium'
+		id : 2, name : 'Medium'
 	},
 	{
-		id : 1, name : 'Hard'
+		id : 3, name : 'Hard'
 	}
 ];
 
