@@ -3,21 +3,72 @@
 <head>
 	<meta charset="utf-8"/>
 	<title>Pictionary</title>
-	<!-- Latest compiled and minified CSS -->
-	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> -->
-	<!-- Optional theme -->
-	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous"> -->
-	<link rel="stylesheet" href="bootstrap.min"/>
-	<link rel="stylesheet" href="bootstrap-theme"/>
-	<!--   DEV-CSS	--><style>#canvas{border:1px solid black;}</style> 
+	
+	<link rel="stylesheet" href="css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="css/bootstrap.theme.css"/>
 
-	<script type="text/javascript" src="lib/jquery-2.1.3.min.js"></script>
 	<script type="text/javascript" src="http://localhost:1337/socket.io/socket.io.js"></script>
-
+	<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
 	<script type="text/javascript" src="js/client.js"></script>
+	<style>
+		.tuiles{
+			height:80px;
+		}
+	</style>
 </head>
 <body>
-	
+	<h1>Bienvue</h1>
+	<div class="container">
+		<div id="username">---</div>
+		<div class="login">
+			<div class="row">
+				<div class="col-md-offset-3 col-md-6">
+					<div class="panel panel-primary ">
+						<div class="panel-heading">
+							Connection
+						</div>
+						<div class="panel-body">
+							<form>
+								<div class="form-group">
+									<label for="connection_pseudo">Username</label>
+									<input class="form-control" type="text" name="connection_pseudo" id="connection_pseudo" placeholder="Username"/>
+									<div class="btn btn-primary" id="btn-connect">
+										Connect
+									</div>
+								</div>
+							</form>
+						</div>
+					</div><!--panel-->
+				</div>
+			</div>
+		</div><!--login-->
 
+		<div class="channel-list">
+			<div class="row">
+				 <div class="col-md-12">
+				 	<div class="panel panel-info">
+				 		<div class="panel-heading">
+				 			Liste des salons	
+				 		</div>
+				 		<div class="panel-body">
+				 			<!--Exemple d'un joueur -->
+				 				<div class="col-md-12">
+				 					<div class="btn btn-default">Easy</div>
+				 					<div class="btn btn-default">Medium</div>
+				 					<div class="btn btn-default">Hard</div>
+				 				</div>
+				 			<!---->
+				 		</div>
+				 	</div>
+				 </div>
+			</div>
+		</div><!--channel-list-->
+
+		<div class="game">
+			<h1>Game</h1>
+		</div><!--game-->
+
+
+	</div><!--container-->
 </body>
 </html>

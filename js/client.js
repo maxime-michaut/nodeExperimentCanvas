@@ -1,6 +1,37 @@
 $(document).ready(function(){
 	var socket = io.connect('http://localhost:1337');
 
+	
+	$('.channel-list').hide();
+	$('.game').hide();
+
+
+	var userC = {};
+	var users = [];
+
+	$('#btn-connect').click(function(){
+		userC.username = $('#connection_pseudo').val();
+		socket.emit('login',{
+			username : userC.username
+		});
+	});
+
+	socket.on('login',function(data){
+		if(data.state == 'ok'){
+			userC = data.userC;
+			users = data.users;
+			console.log(userC);
+			console.log(users);
+			alert('vous êtes connecté');
+			$('.login').hide();
+			$('.channel-list').show();
+			$('#username').html(userC.username);
+		}else if(data.state == 'error'){
+			alert(data.message);
+		}
+	});
+
+
 	// var canvas = document.getElementById('canvas');
 	// var ctx = canvas.getContext('2d');
 	// var mouse = {
