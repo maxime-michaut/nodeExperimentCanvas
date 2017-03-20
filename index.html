@@ -3,16 +3,23 @@
 <head>
 	<meta charset="utf-8"/>
 	<title>Pictionary</title>
-	
+
 	<link rel="stylesheet" href="css/bootstrap.min.css"/>
-	<link rel="stylesheet" href="css/bootstrap.theme.css"/>
+	<!-- <link rel="stylesheet" href="css/bootstrap.theme.css"/> -->
 
 	<script type="text/javascript" src="http://localhost:1337/socket.io/socket.io.js"></script>
 	<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
-	<script type="text/javascript" src="js/client.js"></script>
+
+
 	<style>
-		.tuiles{
-			height:80px;
+		.tuiles { height:80px; }
+		.score { margin-left: 8px; }
+		.discover { background-color: red; }
+		.drawerUser { background-color: green; }
+		.listWord, .listUser {
+			border: 1px solid black;
+			height: 200px;
+			overflow-y: scroll;
 		}
 	</style>
 </head>
@@ -28,13 +35,13 @@
 							Connection
 						</div>
 						<div class="panel-body">
-							<form>
+							<form id="form-login">
 								<div class="form-group">
 									<label for="connection_pseudo">Username</label>
 									<input class="form-control" type="text" name="connection_pseudo" id="connection_pseudo" placeholder="Username"/>
-									<div class="btn btn-primary" id="btn-connect">
+									<button type="submit" class="btn btn-primary" id="btn-connect">
 										Connect
-									</div>
+									</button>
 								</div>
 							</form>
 						</div>
@@ -43,32 +50,48 @@
 			</div>
 		</div><!--login-->
 
-		<div class="channel-list">
-			<div class="row">
-				 <div class="col-md-12">
-				 	<div class="panel panel-info">
-				 		<div class="panel-heading">
-				 			Liste des salons	
-				 		</div>
-				 		<div class="panel-body">
-				 			<!--Exemple d'un joueur -->
-				 				<div class="col-md-12">
-				 					<div class="btn btn-default">Easy</div>
-				 					<div class="btn btn-default">Medium</div>
-				 					<div class="btn btn-default">Hard</div>
-				 				</div>
-				 			<!---->
-				 		</div>
-				 	</div>
-				 </div>
-			</div>
-		</div><!--channel-list-->
-
 		<div class="game">
-			<h1>Game</h1>
-		</div><!--game-->
+			<div class="row">
+				<div class="col-xs-4">
+					<div class="col-xs-12">
+						<ul class="listUser">
 
+						</ul>
+					</div>
+					<div class="col-xs-12">
+						<div>
+							Round: <span class="round">-</span>
+						</div>
+						<div>
+							Timer: <span class="timer">-</span>
+						</div>
+						<div>
+							Verify: <span class="verify">-</span>
+						</div>
+						<div>
+							Word: <span class="word">-</span>
+						</div>
+						<div>
+							Drawer: <span class="drawer">-</span>
+						</div>
+					</div>
+					<div class="col-xs-12 listWord">
+					</div>
+					<div class="col-xs-12">
+						<input type="text" name="inputWord"/>
+						<button class="submitWord">Submit</button>
+					</div>
+				</div>
+				<div class="col-xs-8">
+					<h1>Game</h1>
+					<canvas id="canvas" width="500" height="500" style="border: 1px solid black"></canvas>
+
+				</div>
+			</div>
 
 	</div><!--container-->
+
+	<script type="text/javascript" src="js/canvas.js"></script>
+	<script type="text/javascript" src="js/client.js"></script>
 </body>
 </html>

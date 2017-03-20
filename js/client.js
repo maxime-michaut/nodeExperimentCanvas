@@ -1,85 +1,97 @@
-$(document).ready(function(){
 	var socket = io.connect('http://localhost:1337');
 
-	
-	$('.channel-list').hide();
 	$('.game').hide();
 
-
 	var userC = {};
-	var users = [];
 
-	$('#btn-connect').click(function(){
+	$('#form-login').submit(function(e) {
+		e.preventDefault();
 		userC.username = $('#connection_pseudo').val();
 		socket.emit('login',{
 			username : userC.username
 		});
 	});
 
-	socket.on('login',function(data){
+	socket.on('login', function(data){
 		if(data.state == 'ok'){
 			userC = data.userC;
-			users = data.users;
-			console.log(userC);
-			console.log(users);
-			alert('vous êtes connecté');
 			$('.login').hide();
-			$('.channel-list').show();
+			$('.game').show();
 			$('#username').html(userC.username);
 		}else if(data.state == 'error'){
 			alert(data.message);
 		}
 	});
 
+	socket.on('startRound', function(data){
+		$('.round').html(data.round);
+		ctx.clearRect(0,0,canvas.width,canvas.height);
+		if (data.drawer.socketId == userC.socketId) {
+			$('.drawer').html('Tu dessines');
+			$('.word').html(data.word);
+		} else {
+			$('.drawer').html(data.drawer.username);
+			var word = '';
+			for (i=0; i<data.word.length; i++) {
+				word += '_ ';
+			}
+			$('.word').html(word);
+		}
+	});
 
-	// var canvas = document.getElementById('canvas');
-	// var ctx = canvas.getContext('2d');
-	// var mouse = {
-	// 	X : 0,
-	// 	Y : 0,
-	// 	click : 0
-	// }
+	socket.on('timer', function(data){
+		$('.timer').html(data.timer);
+	});
 
-	// $(document).mousemove(function(e){
-	// 	console.log('test');
+	$('input[name=inputWord]').keydown(function(e){
+		if (e.keyCode == 13) {
+			var word = $('input[name=inputWord]').val();
+			if (word.length) {
+				socket.emit('testWord', word);
+				$('input[name=inputWord]').val('');
+			}
+		}
+	});
 
-	// 	canvas_X = canvas.offsetLeft;
-	// 	canvas_Y = canvas.offsetTop;
-	// 	nextMouseX = e.clientX - canvas_X;
-	// 	nextMouseY = e.clientY - canvas_Y;
-	// 	if(mouse.click){
-	// 		// ctx.beginPath();
-	// 		// ctx.moveTo(mouse.X,mouse.Y);
-	// 		// ctx.lineTo(nextMouseX,nextMouseY);
-	// 		// ctx.stroke();
-	// 		// ctx.closePath();
-	// 		socket.emit(
-	// 			'draw',
-	// 			{xa:mouse.X, ya:mouse.Y, xb:nextMouseX, yb:nextMouseY}
-	// 		);
-	// 	}
-	// 	mouse.X = nextMouseX;
-	// 	mouse.Y = nextMouseY;
-	// });
+	socket.on('testWord', function(data){
+		if (data.verify == true) {
+			$('.verify').html('trouvé');
+			$('.word').html('word');
+		} else {
+			$('.verify').html('nop');
+		}
+	})
 
-	// $(document).mousedown(function(){
-	// 	console.log('mousedown');
-	// 	mouse.click = true;
-	// });
-	// $(document).mouseup(function(){
-	// 	console.log('mouseup');
-	// 	mouse.click = false;
-	// });
+	socket.on('updateUsers', function(users) {
+		$('.listUser').html('');
+		if (users.length != 0) {
+			users.forEach(function(user){
+				element = '<li ';
+				if (user.drawer == true) {
+					element += 'class="drawerUser"';
+				}
+				if (user.discover == true) {
+					element += 'class="discover"';
+				}
+				element += '>'+user.username+'<span class="score">'+user.score+'</span></li>';
+				$('.listUser').append(element);
+			});
+		}
+	});
 
-	// socket.on('serverDraw',function(params){
-	// 	ctx.beginPath();
-	// 	ctx.moveTo(params.xa,params.ya);
-	// 	ctx.lineTo(params.xb,params.yb);
-	// 	ctx.stroke();
-	// 	ctx.closePath();
-	// });
+	socket.on('stopRound', function(data){
+		$('.timer').html('next round soon');
+	});
 
-	
+	socket.on('endGame', function(data){
+		$('.winner').html(data.username + 'a gagné avec ' + data.score + 'points');
+	});
 
-});
+	socket.on('serverDraw',function(data){
+		canvasDraw(data.xa, data.ya, data.xb, data.yb);
+	});
 
+	socket.on('addListWord', function(word){
+		$('.listWord').append('<div>'+word+'</div>');
+		$('.listWord').scrollTop($('.listWord')[0].scrollHeight);
+	});
